@@ -79,16 +79,16 @@ class ConvertGivenCurrencies:
         return absentCurrenciesResponse
 
 
-    def getConvetredCurrenciesData(self, existBaseCurrenciesAbbrWithAmount, existQuoteCurrenciesAbbr, gatewayApilayerGetLastQuotes, converter):
+    def getConvetredCurrenciesData(self, existBaseCurrenciesAbbrWithAmount, existQuoteCurrenciesAbbrs, gatewayApilayerGetLastQuotes, converter):
     #return [{'USD':100, 'CAD': 138}, ..., {})]        
         convertedCurrenciesData = []
         
-        for baseCurrency in existBaseCurrenciesAbbrWithAmount.keys():
-            baseAmount = existBaseCurrenciesAbbrWithAmount[baseCurrency]
-            quotes =  gatewayApilayerGetLastQuotes.main(baseCurrency, existQuoteCurrenciesAbbr)   
+        for baseCurrencyAbbr in existBaseCurrenciesAbbrWithAmount.keys():
+            baseAmount = existBaseCurrenciesAbbrWithAmount[baseCurrencyAbbr]
+            quotes =  gatewayApilayerGetLastQuotes.main(baseCurrencyAbbr, existQuoteCurrenciesAbbrs)   
             for quoteAbbr in quotes.keys():
                 quoteRatio = quotes[quoteAbbr]
-                convertedCurrenciesData.append({baseCurrency: baseAmount, quoteAbbr: converter.main(baseAmount, quoteRatio)})
+                convertedCurrenciesData.append({baseCurrencyAbbr: baseAmount, quoteAbbr: converter.main(baseAmount, quoteRatio)})
 
         return convertedCurrenciesData
 

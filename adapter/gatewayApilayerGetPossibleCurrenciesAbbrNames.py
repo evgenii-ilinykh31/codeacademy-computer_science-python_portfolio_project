@@ -6,12 +6,8 @@ class GatewayApilayerGetPossibleCurrenciesAbbrNames:
 
     def __init__(self):
         self.url = "https://api.apilayer.com/exchangerates_data/symbols"
-
         self.payload = {}
-
-        self.headers = {
-            "apikey": "iT5FfwzzrqCaatDrP6qnRAJtRRIEe9Mz"
-        } 
+        self.headers = {"apikey": "iT5FfwzzrqCaatDrP6qnRAJtRRIEe9Mz"} 
 
 
     def main(self):
@@ -36,12 +32,12 @@ class GatewayApilayerGetPossibleCurrenciesAbbrNames:
             statusCode = response.status_code
         if statusCode != 200:
             sys.exit(f"something wrong with server | statusCode: {statusCode}")
-#todo: add logging of mistake
+            #todo: add logging of mistake
 
         responseParse = json.loads(response.text)
         if not responseParse['success']: 
             sys.exit(f"something wrong with server | responseParse: {responseParse}")
-#todo: add logging of mistake           
+            #todo: add logging of mistake           
  
         return responseParse['symbols']
 

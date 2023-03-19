@@ -4,8 +4,11 @@ from adapter.gatewayApilayerGetPossibleCurrenciesAbbrNames import GatewayApilaye
 
 print("everything is NY NY")
 
-print(ConvertGivenCurrencies({'USD': 10, 'FAKE_BASE': 100}, ['JPY', 'KRW', 'FAKE_QUOTE']).main())
+#print(ConvertGivenCurrencies({'USD': 10, 'FAKE_BASE': 100}, ['JPY', 'KRW', 'FAKE_QUOTE']).main())
 
+test1 = ''.join(['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'])[:-5]
+
+print(test1)
 
 print('test completed')
 
