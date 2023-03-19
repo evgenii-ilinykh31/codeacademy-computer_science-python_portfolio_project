@@ -4,7 +4,9 @@ from usecase.convertGivenCurrencies import ConvertGivenCurrencies
 
 print("everything is NY NY")
 
-print('test')
+convertGivenCurrencies = ConvertGivenCurrencies({'USD: 10'}, ['JPY', 'KRW'])
+
+print('test completed')
 
 
 

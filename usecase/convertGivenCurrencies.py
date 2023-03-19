@@ -3,19 +3,11 @@ from adapter.gatewayApilayerGetPossibleCurrenciesAbbrNames import GatewayApilaye
 
 
 class ConvertGivenCurrencies:
-    baseCurrencyAbbr = 'baseCurrencyAbbr'
-    baseCurrencyName = 'baseCurrencyName'
-    baseCurrencyAmount = 'baseCurrencyAmount'
-    quoteCurrencyAbbr = 'quoteCurrencyAbbr'
-    quoteCurrencyName = 'quoteCurrencyName'
-    quoteCurrencyAmount = 'quoteCurrencyAmount'
-
 
     def __init__(self, baseCurrenciesAbbrWithAmount, quoteCurrenciesAbbr):
-#{'USD': 100, 'EUR': 100, 'CHF': 100}
+    #{'USD': 100, 'EUR': 100, 'CHF': 100}
         self.baseCurrenciesAbbrWithAmount = baseCurrenciesAbbrWithAmount
-
-#['JPY', 'CHY', 'CHN', 'KRW']
+    #['JPY', 'CHY', 'CHN', 'KRW']
         self.quoteCurrenciesAbbr = quoteCurrenciesAbbr
 
         self.possibleCurrenciesAbbrNames = GatewayApilayerGetPossibleCurrenciesAbbrNames().main()
@@ -26,10 +18,10 @@ class ConvertGivenCurrencies:
 
 
     def main(self):
-#return: [(False, 'There is no such abbrOfCurrency on our foreigh exchange market'),
-#(True, "For 100 United States Dollar(USD) you would get 131.84 Japanese Yen(JPY)"),
-# ...,
-# {}]     
+    #return: [(False, 'There is no such abbrOfCurrency on our foreigh exchange market'),
+    #(True, "For 100 United States Dollar(USD) you would get 131.84 Japanese Yen(JPY)"),
+    # ...,
+    # {}]     
         existBaseCurrenciesAbbrWithAmount, absentBaseCurrenciesAbbr = self.checkBaseCurrencyExists(self.baseCurrenciesAbbrWithAmount, self.possibleCurrenciesAbbrNames)
         
         existQuoteCurrenciesAbbr, absentQuoteCurrenciesAbbr = self.checkQuoteCurrencyExists(self.quoteCurrenciesAbbr, self.possibleCurrenciesAbbrNames)
@@ -81,7 +73,7 @@ class ConvertGivenCurrencies:
 
 
     def getConvetredCurrenciesData(self, existBaseCurrenciesAbbrWithAmount, existQuoteCurrenciesAbbr, gatewayApilayerGetPossibleCurrenciesAbbrNames, converter):
-#return [{'USD':100, 'CAD': 138}, ..., {})]        
+    #return [{'USD':100, 'CAD': 138}, ..., {})]        
         convertedCurrenciesData = []
         
         for baseCurrency in existBaseCurrenciesAbbrWithAmount.keys():
@@ -95,7 +87,7 @@ class ConvertGivenCurrencies:
 
 
     def getConvertedCurrenciesResponse(self, convertedCurrenciesData, possibleCurrenciesAbbrNames):
-#return [(True, "For 100 United States Dollar(USD) you would get 131.84 Japanese Yen(JPY)")]
+    #return [(True, "For 100 United States Dollar(USD) you would get 131.84 Japanese Yen(JPY)")]
         response = []
 
         for currencyData in convertedCurrenciesData:
@@ -107,7 +99,7 @@ class ConvertGivenCurrencies:
             quoteCurrencyName = possibleCurrenciesAbbrNames[quoteCurrencyAbbr]
             response.append(
                 True,
-                f"For {baseCurrencyAmount} {baseCurrencyName}({baseCurrencyAbbr}) you would get {quoteCurrencyAmount} {quoteCurrencyName}({quoteCurrencyAbbr}})"
+                f"For {baseCurrencyAmount} {baseCurrencyName}({baseCurrencyAbbr}) you would get {quoteCurrencyAmount} {quoteCurrencyName}({quoteCurrencyAbbr})"
             )
 
 
