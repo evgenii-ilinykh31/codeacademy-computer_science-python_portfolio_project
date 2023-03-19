@@ -30,18 +30,18 @@ class ConvertGivenCurrencies:
         absentCurrenciesResponse = []
         if len(absentBaseCurrenciesAbbr + absentQuoteCurrenciesAbbr) > 0:
             absentCurrenciesResponse = self.getAbsentCurrenciesResponse(absentBaseCurrenciesAbbr + absentQuoteCurrenciesAbbr)
+ 
+        convertedCurrenciesData = []
 
-        convertedCurrenciesData = self.getConvetredCurrenciesData(
-            existBaseCurrenciesAbbrWithAmount,
-            existQuoteCurrenciesAbbr,
-            self.gatewayApilayerGetLastQuotes,
-            self.converter
-        )
-
-        convertedCurrenciesResponse = self.getConvertedCurrenciesResponse(convertedCurrenciesData, self.possibleCurrenciesAbbrNames)
-        
-    
-
+        if len(existBaseCurrenciesAbbrWithAmount) > 0 and len(existQuoteCurrenciesAbbr) > 0:
+            convertedCurrenciesData = self.getConvetredCurrenciesData(
+                existBaseCurrenciesAbbrWithAmount,
+                existQuoteCurrenciesAbbr,
+                self.gatewayApilayerGetLastQuotes,
+                self.converter
+            )
+            convertedCurrenciesResponse = self.getConvertedCurrenciesResponse(convertedCurrenciesData, self.possibleCurrenciesAbbrNames)
+       
         return absentCurrenciesResponse + convertedCurrenciesResponse
 
 
