@@ -4,7 +4,7 @@ from usecase.convertGivenCurrencies import ConvertGivenCurrencies
 
 print("everything is NY NY")
 
-convertGivenCurrencies = ConvertGivenCurrencies({'USD: 10'}, ['JPY', 'KRW'])
+print(ConvertGivenCurrencies({'USD': 10, 'FAKE_BASE': 100}, ['JPY', 'KRW', 'FAKE_QUOTE']).main())
 
 print('test completed')
 

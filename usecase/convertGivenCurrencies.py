@@ -1,5 +1,6 @@
 from businessRule.converter import Converter
 from adapter.gatewayApilayerGetPossibleCurrenciesAbbrNames import GatewayApilayerGetPossibleCurrenciesAbbrNames
+from adapter.gatewayApilayerGetLastQuotes import GatewayApilayerGetLastQuotes
 
 
 class ConvertGivenCurrencies:
@@ -12,7 +13,7 @@ class ConvertGivenCurrencies:
 
         self.possibleCurrenciesAbbrNames = GatewayApilayerGetPossibleCurrenciesAbbrNames().main()
 
-        self.gatewayApilayerGetPossibleCurrenciesAbbrNames = GatewayApilayerGetPossibleCurrenciesAbbrNames()
+        self.gatewayApilayerGetLastQuotes = GatewayApilayerGetLastQuotes()
 
         self.converter = Converter()
 
@@ -33,13 +34,15 @@ class ConvertGivenCurrencies:
         convertedCurrenciesData = self.getConvetredCurrenciesData(
             existBaseCurrenciesAbbrWithAmount,
             existQuoteCurrenciesAbbr,
-            self.gatewayApilayerGetPossibleCurrenciesAbbrNames,
+            self.gatewayApilayerGetLastQuotes,
             self.converter
         )
 
         convertedCurrenciesResponse = self.getConvertedCurrenciesResponse(convertedCurrenciesData, self.possibleCurrenciesAbbrNames)
         
-        return convertedCurrenciesResponse + absentCurrenciesResponse
+    
+
+        return absentCurrenciesResponse + convertedCurrenciesResponse
 
 
     def checkBaseCurrencyExists(self, baseCurrenciesAbbrWithAmount, possibleCurrenciesAbbrNames):
@@ -51,7 +54,9 @@ class ConvertGivenCurrencies:
                 existBaseCurrenciesAbbrWithAmount[currencyAbbr] = baseCurrenciesAbbrWithAmount[currencyAbbr]
             else:
                 absentBaseCurrenciesAbbr.append(currencyAbbr)
-        
+       
+        return existBaseCurrenciesAbbrWithAmount, absentBaseCurrenciesAbbr
+
 
     def checkQuoteCurrencyExists(self, quoteCurrenciesAbbr, possibleCurrenciesAbbrNames):
         existQuoteCurrenciesAbbr = []
@@ -62,6 +67,8 @@ class ConvertGivenCurrencies:
                 existQuoteCurrenciesAbbr.append(currencyAbbr)
             else:
                 absentQuoteCurrenciesAbbr.append(currencyAbbr)
+        
+        return existQuoteCurrenciesAbbr, absentQuoteCurrenciesAbbr
 
     def getAbsentCurrenciesResponse(self, absentCurrenciesAbbr):
         absentCurrenciesResponse = []
@@ -72,13 +79,13 @@ class ConvertGivenCurrencies:
         return absentCurrenciesResponse
 
 
-    def getConvetredCurrenciesData(self, existBaseCurrenciesAbbrWithAmount, existQuoteCurrenciesAbbr, gatewayApilayerGetPossibleCurrenciesAbbrNames, converter):
+    def getConvetredCurrenciesData(self, existBaseCurrenciesAbbrWithAmount, existQuoteCurrenciesAbbr, gatewayApilayerGetLastQuotes, converter):
     #return [{'USD':100, 'CAD': 138}, ..., {})]        
         convertedCurrenciesData = []
         
         for baseCurrency in existBaseCurrenciesAbbrWithAmount.keys():
             baseAmount = existBaseCurrenciesAbbrWithAmount[baseCurrency]
-            quotes =  gatewayApilayerGetPossibleCurrenciesAbbrNames(baseCurrency, existQuoteCurrenciesAbbr)   
+            quotes =  gatewayApilayerGetLastQuotes.main(baseCurrency, existQuoteCurrenciesAbbr)   
             for quoteAbbr in quotes.keys():
                 quoteRatio = quotes[quoteAbbr]
                 convertedCurrenciesData.append({baseCurrency: baseAmount, quoteAbbr: converter.main(baseAmount, quoteRatio)})
@@ -89,18 +96,25 @@ class ConvertGivenCurrencies:
     def getConvertedCurrenciesResponse(self, convertedCurrenciesData, possibleCurrenciesAbbrNames):
     #return [(True, "For 100 United States Dollar(USD) you would get 131.84 Japanese Yen(JPY)")]
         response = []
-
+        
         for currencyData in convertedCurrenciesData:
-            baseCurrencyAbbr = currencyData.keys[0]
-            baseCurrencyAmount = currencyData.values[0]
+            currencyDataAbbrs = list(currencyData.keys())
+            currencyDataAmounts = list(currencyData.values())
+
+            baseCurrencyAbbr = currencyDataAbbrs[0]
+            baseCurrencyAmount = currencyDataAmounts[0]
             baseCurrencyName = possibleCurrenciesAbbrNames[baseCurrencyAbbr]
-            quoteCurrencyAbbr = currencyData.keys[1]
-            quoteCurrencyAmount = currencyData.values[1]
+
+            quoteCurrencyAbbr = currencyDataAbbrs[1]
+            quoteCurrencyAmount = currencyDataAmounts[1]
             quoteCurrencyName = possibleCurrenciesAbbrNames[quoteCurrencyAbbr]
+
             response.append(
-                True,
-                f"For {baseCurrencyAmount} {baseCurrencyName}({baseCurrencyAbbr}) you would get {quoteCurrencyAmount} {quoteCurrencyName}({quoteCurrencyAbbr})"
+                (True,
+                f"For {baseCurrencyAmount} {baseCurrencyName}({baseCurrencyAbbr}) you would get {round(quoteCurrencyAmount, 3)} {quoteCurrencyName}({quoteCurrencyAbbr})")
             )
+
+        return response
 
 
  
