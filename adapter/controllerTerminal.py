@@ -7,7 +7,9 @@ class ControllerTerminal:
     
     def __init__(self):
         self.codes = 'codes'
+
         self.pattern = "^\s*([a-zA-Z]{3}\s*:\s*\d+\s*,\s*)*([a-zA-Z]{3}\s*:\s*\d+){1}\s*-\s*([a-zA-Z]{3}\s*,\s*)*([a-zA-Z]{3}){1}\s*$"
+
         self.greetings = f"""
 Greetings! Thank you for using of our service!
 
@@ -30,8 +32,7 @@ Please type: """
             GetPossibleCurrenciesAbbrNames().main()
         else:
             baseCurrenciesAbbrWithAmount, quoteCurrenciesAbbr = self.deassambleGetQuotesAnswerToBaseAndQuotesCurrencies(answer)
-
-            #ConvertGivenCurrencies(baseCurrenciesAbbrWithAmount, quoteCurrenciesAbbr).main()
+            ConvertGivenCurrencies(baseCurrenciesAbbrWithAmount, quoteCurrenciesAbbr).main()
 
 
     def checkInput(self, answer = '', checkWords = [], checkPatternsForRe = []):
@@ -50,13 +51,11 @@ Please type: """
     def deassambleGetQuotesAnswerToBaseAndQuotesCurrencies(self, answer):
         answer = answer.replace(" ", "").split('-')
 
-        baseCurrenciesAbbrWithAmount = []
+        baseCurrenciesAbbrWithAmount = {}
         for abbrAmountPair in answer[0].split(','):
             abbrAmountPair = abbrAmountPair.split(':')
-            baseCurrenciesAbbrWithAmount.append({abbrAmountPair[0]:abbrAmountPair[1]})
+            baseCurrenciesAbbrWithAmount[abbrAmountPair[0]] = int(abbrAmountPair[1])
         
         quoteCurrenciesAbbr = answer[1].split(',')
 
         return baseCurrenciesAbbrWithAmount, quoteCurrenciesAbbr
-    
-    
