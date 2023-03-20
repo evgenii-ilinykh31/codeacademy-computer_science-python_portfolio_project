@@ -1,4 +1,11 @@
+from interface.interfaceTerminal import InterfaceTerminal
+
+
 class PresenterPrintPossibleCurrenciesListToTerminal:
+
+    def __init__(self):
+        self.interfaceTerminal = InterfaceTerminal()
+
 
     def main(self, possibleCurrenciesAbbrNames):
     #{
@@ -10,6 +17,8 @@ class PresenterPrintPossibleCurrenciesListToTerminal:
     #   'CHF': 'SWISS FRANK',
     #   'KRW': 'KOREAN WON'
     #}
-        print('List of all currencies for which we could provide exchange rates:')
+        messages = ['List of all currencies for which we could provide exchange rates:']
         for abbr, name in possibleCurrenciesAbbrNames.items():
-            print(f"{abbr}: {name}")
+            messages.append(f"{abbr}: {name}")
+        
+        self.interfaceTerminal.main(messages)
