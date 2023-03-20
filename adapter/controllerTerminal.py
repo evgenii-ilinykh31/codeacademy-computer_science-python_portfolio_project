@@ -26,6 +26,12 @@ Please type: """
         answer = ''
         while not self.checkInput(answer, [self.codes], [self.pattern]):
             answer = self.doGreetingsGetInput(self.greetings)
+        if answer == self.codes:
+            GetPossibleCurrenciesAbbrNames().main()
+        else:
+            baseCurrenciesAbbrWithAmount, quoteCurrenciesAbbr = self.deassambleGetQuotesAnswerToBaseAndQuotesCurrencies(answer)
+            
+            #ConvertGivenCurrencies(baseCurrenciesAbbrWithAmount, quoteCurrenciesAbbr).main()
 
 
     def checkInput(self, answer = '', checkWords = [], checkPatternsForRe = []):
@@ -39,3 +45,18 @@ Please type: """
 
     def doGreetingsGetInput(self, greetings):
         return input(greetings)
+    
+
+    def deassambleGetQuotesAnswerToBaseAndQuotesCurrencies(self, answer):
+        answer = answer.replace(" ", "").split('-')
+
+        baseCurrenciesAbbrWithAmount = []
+        for abbrAmountPair in answer[0].split(','):
+            abbrAmountPair = abbrAmountPair.split(':')
+            baseCurrenciesAbbrWithAmount.append({abbrAmountPair[0]:abbrAmountPair[1]})
+        
+        quoteCurrenciesAbbr = answer[1].split(',')
+
+        return baseCurrenciesAbbrWithAmount, quoteCurrenciesAbbr
+    
+    

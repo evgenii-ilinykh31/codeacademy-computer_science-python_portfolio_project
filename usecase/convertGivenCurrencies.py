@@ -1,6 +1,7 @@
 from businessRule.converter import Converter
 from adapter.gatewayApilayerGetPossibleCurrenciesAbbrNames import GatewayApilayerGetPossibleCurrenciesAbbrNames
 from adapter.gatewayApilayerGetLastQuotes import GatewayApilayerGetLastQuotes
+from adapter.presenterPrintConverterCurrenciesToTerminal import PresenterPrintConverterCurrenciesToTerminal
 
 
 class ConvertGivenCurrencies:
@@ -42,7 +43,7 @@ class ConvertGivenCurrencies:
             )
             convertedCurrenciesResponse = self.getConvertedCurrenciesResponse(convertedCurrenciesData, self.possibleCurrenciesAbbrNames)
        
-        return absentCurrenciesResponse + convertedCurrenciesResponse
+        PresenterPrintConverterCurrenciesToTerminal().main(absentCurrenciesResponse + convertedCurrenciesResponse)
 
 
     def checkBaseCurrencyExists(self, baseCurrenciesAbbrWithAmount, possibleCurrenciesAbbrNames):
