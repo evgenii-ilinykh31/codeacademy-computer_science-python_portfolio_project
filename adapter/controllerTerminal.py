@@ -30,7 +30,7 @@ Please type: """
             GetPossibleCurrenciesAbbrNames().main()
         else:
             baseCurrenciesAbbrWithAmount, quoteCurrenciesAbbr = self.deassambleGetQuotesAnswerToBaseAndQuotesCurrencies(answer)
-            
+
             #ConvertGivenCurrencies(baseCurrenciesAbbrWithAmount, quoteCurrenciesAbbr).main()
 
 
