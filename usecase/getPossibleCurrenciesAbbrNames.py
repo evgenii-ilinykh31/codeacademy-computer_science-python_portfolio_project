@@ -1,7 +1,8 @@
 from adapter.presenterPrintPossibleCurrenciesListToTerminal import PresenterPrintPossibleCurrenciesListToTerminal
-
+from adapter.gatewayApilayerGetPossibleCurrenciesAbbrNames import GatewayApilayerGetPossibleCurrenciesAbbrNames
 
 class GetPossibleCurrenciesAbbrNames:
     
     def main(self):
-        print("todo: possible currencies abbreverations and names")
+
+        possibleCurrenciesAbbrNames = GatewayApilayerGetPossibleCurrenciesAbbrNames().main()

@@ -1,2 +1,15 @@
 class PresenterPrintPossibleCurrenciesListToTerminal:
-    pass
+
+    def main(self, possibleCurrenciesAbbrNames):
+    #{
+    #   'USD': 'UNITED STATES DOLLAR',
+    #   'AUD': 'AUSTRALIAN DOLLAR',
+    #   'CAD': 'CANADIAN DOLLAR',
+    #   'EUR': 'EURO',
+    #   'JPY': 'JAPANESE YEN',
+    #   'CHF': 'SWISS FRANK',
+    #   'KRW': 'KOREAN WON'
+    #}
+        print('List of all currencies for which we could provide exchange rates:')
+        for currencyInfo in possibleCurrenciesAbbrNames.zip():
+            print(f"{currencyInfo[0]}: {currencyInfo[1]}")
