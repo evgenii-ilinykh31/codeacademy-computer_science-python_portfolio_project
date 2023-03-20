@@ -25,6 +25,19 @@ class InterfaceWebApilayer:
         return responseParse
     
 
+# request on response | string:
+        #  {
+        #    "base": "USD",
+        #    "date": "2023-03-19",
+        #    "rates": {
+        #      "CHF": 0.922739,
+        #      "EUR": 0.93005,
+        #      "JPY": 132.394008
+        #    },
+        #    "success": true,
+        #    "timestamp": 1679253603
+        #  }
+
  #response on request - JSON string
         # {
         #   "success": true,
