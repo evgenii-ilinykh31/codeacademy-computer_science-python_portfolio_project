@@ -7,7 +7,7 @@ class ControllerTerminal:
     
     def __init__(self):
         self.codes = 'codes'
-        self.pattern = "^([a-zA-Z]{3}:\d+,)*([a-zA-Z]{3}:\d+){1}-([a-zA-Z]{3},)*([a-zA-Z]{3}){1}$"
+        self.pattern = "^\s*([a-zA-Z]{3}\s*:\s*\d+\s*,\s*)*([a-zA-Z]{3}\s*:\s*\d+){1}\s*-\s*([a-zA-Z]{3}\s*,\s*)*([a-zA-Z]{3}){1}\s*$"
         self.greetings = f"""
 Greetings! Thank you for using of our service!
 
@@ -20,8 +20,6 @@ If you want to get last currency rates - please  message in format below and hit
 If you want to see available currency codes - please type word "{self.codes}" and hit enter.          
 
 Please type: """
-
-        
 
 
     def main(self):
