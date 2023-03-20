@@ -4,5 +4,5 @@ from adapter.gatewayApilayerGetPossibleCurrenciesAbbrNames import GatewayApilaye
 class GetPossibleCurrenciesAbbrNames:
     
     def main(self):
-
         possibleCurrenciesAbbrNames = GatewayApilayerGetPossibleCurrenciesAbbrNames().main()
+        PresenterPrintPossibleCurrenciesListToTerminal().main(possibleCurrenciesAbbrNames)

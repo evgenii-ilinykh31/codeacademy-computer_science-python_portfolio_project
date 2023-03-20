@@ -13,7 +13,7 @@ class ControllerTerminal:
         self.greetings = f"""
 Greetings! Thank you for using of our service!
 
-If you want to get last currency rates - please  message in format below and hit enter. You can use spaces - they would be ignored:
+If you want to get last currency rates - please  message in format below and hit enter. You can use spaces, upper or lower index - they would be ignored:
     XXX:z1,YYY:z2-AAA,BBB,CCC
     where XXX, YYY - base currencies ISO 4217 codes
     z1, z2 - amounts which you want to calculate
@@ -28,7 +28,7 @@ Please type: """
         answer = ''
         while not self.checkInput(answer, [self.codes], [self.pattern]):
             answer = self.doGreetingsGetInput(self.greetings)
-        if answer == self.codes:
+        if answer.lower() == self.codes:
             GetPossibleCurrenciesAbbrNames().main()
         else:
             baseCurrenciesAbbrWithAmount, quoteCurrenciesAbbr = self.deassambleGetQuotesAnswerToBaseAndQuotesCurrencies(answer)
@@ -54,8 +54,8 @@ Please type: """
         baseCurrenciesAbbrWithAmount = {}
         for abbrAmountPair in answer[0].split(','):
             abbrAmountPair = abbrAmountPair.split(':')
-            baseCurrenciesAbbrWithAmount[abbrAmountPair[0]] = int(abbrAmountPair[1])
+            baseCurrenciesAbbrWithAmount[abbrAmountPair[0].upper()] = int(abbrAmountPair[1])
         
-        quoteCurrenciesAbbr = answer[1].split(',')
+        quoteCurrenciesAbbr = [abbr.upper() for abbr in answer[1].split(',')]
 
         return baseCurrenciesAbbrWithAmount, quoteCurrenciesAbbr

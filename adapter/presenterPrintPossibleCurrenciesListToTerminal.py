@@ -11,5 +11,5 @@ class PresenterPrintPossibleCurrenciesListToTerminal:
     #   'KRW': 'KOREAN WON'
     #}
         print('List of all currencies for which we could provide exchange rates:')
-        for currencyInfo in possibleCurrenciesAbbrNames.zip():
-            print(f"{currencyInfo[0]}: {currencyInfo[1]}")
+        for abbr, name in possibleCurrenciesAbbrNames.items():
+            print(f"{abbr}: {name}")

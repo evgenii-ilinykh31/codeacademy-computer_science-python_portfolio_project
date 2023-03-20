@@ -7,8 +7,6 @@ from adapter.presenterPrintConverterCurrenciesToTerminal import PresenterPrintCo
 class ConvertGivenCurrencies:
 
     def __init__(self, baseCurrenciesAbbrWithAmount, quoteCurrenciesAbbr):
-        print(baseCurrenciesAbbrWithAmount)
-        print(quoteCurrenciesAbbr)
     #{'USD': 100, 'EUR': 100, 'CHF': 100}
         self.baseCurrenciesAbbrWithAmount = baseCurrenciesAbbrWithAmount
     #['JPY', 'CHY', 'CHN', 'KRW']
@@ -34,7 +32,7 @@ class ConvertGivenCurrencies:
         if len(absentBaseCurrenciesAbbr + absentQuoteCurrenciesAbbr) > 0:
             absentCurrenciesResponse = self.getAbsentCurrenciesResponse(absentBaseCurrenciesAbbr + absentQuoteCurrenciesAbbr)
  
-        convertedCurrenciesData = []
+        convertedCurrenciesResponse = []
 
         if len(existBaseCurrenciesAbbrWithAmount) > 0 and len(existQuoteCurrenciesAbbr) > 0:
             convertedCurrenciesData = self.getConvetredCurrenciesData(
