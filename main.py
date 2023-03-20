@@ -1,10 +1,13 @@
-from usecase.convertGivenCurrencies import ConvertGivenCurrencies
-from adapter.gatewayApilayerGetPossibleCurrenciesAbbrNames import GatewayApilayerGetPossibleCurrenciesAbbrNames
+from adapter.controllerTerminal import ControllerTerminal
 
+test_1 = ControllerTerminal().main()
 
+"""
 print("everything is NY NY")
 for item in ConvertGivenCurrencies({'USD': 10, 'FAKE_BASE': 100}, ['JPY', 'KRW', 'FAKE_QUOTE', 'CHF', 'INR', '', 'GBP']).main():
     print(item)
+"""
+
 
 print('test completed')
 
